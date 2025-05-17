@@ -9,6 +9,7 @@ SELECT property.name , review.rating
 FROM  review
 LEFT JOIN property
 ON property.property_id = review.property_id
+ORDER BY property.name asc
 
 -- 3
 SELECT user.first_name , booking.booking_id
