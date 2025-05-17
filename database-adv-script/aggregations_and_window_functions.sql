@@ -6,10 +6,21 @@ GROUP BY b.host_id
 
 
 SELECT
-  property_id,
-  COUNT(*) AS total_bookings,
+  pb.property_id,
+  pb.total_bookings,
   RANK() OVER (
-    ORDER BY COUNT(*) DESC
-  ) AS property_rank
-FROM bookings
-GROUP BY property_id;
+    ORDER BY pb.total_bookings DESC
+  ) AS rank_by_bookings,
+  
+  ROW_NUMBER() OVER (
+    ORDER BY pb.total_bookings DESC
+  ) AS row_number_by_bookings
+
+FROM (
+  SELECT
+    property_id,
+    COUNT(*) AS total_bookings
+  FROM bookings
+  GROUP BY property_id
+) AS pb;
+
