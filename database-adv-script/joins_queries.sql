@@ -6,8 +6,8 @@ ON user.user_id = booking.user_id
 
 -- 2
 SELECT property.name , review.rating
-FROM property
-LEFT JOIN review
+FROM  review
+LEFT JOIN property
 ON property.property_id = review.property_id
 
 -- 3
