@@ -1,18 +1,18 @@
 -- 1
-select property.name , property.location 
-from property 
-where property.property_id in (
-    select review.property_id 
-    from review 
-    group by review.property_id
-    having avg(review.rating) > 4.0
+SELECT property.name , property.location 
+FROM property 
+WHERE property.property_id IN (
+    SELECT review.property_id 
+    FROM review 
+    GROUP BY review.property_id
+    HAVING AVG(review.rating) > 4.0
 )
 
 -- 2
-select user.first_name , user.last_name
-from user 
-where  (
-    select count(*) 
-    from booking 
-    where user.user_id = booking.host_id
+SELECT user.first_name , user.last_name
+FROM user 
+WHERE  (
+    SELECT COUNT(*) 
+    FROM booking 
+    WHERE user.user_id = booking.host_id
      ) > 3
